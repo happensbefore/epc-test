@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 
-	. "epc-test/models"
 	"epc-test/services/product"
 )
 
@@ -13,20 +12,15 @@ const (
 	PATH = "/product"
 )
 
-type CalculateProductReq struct {
-	Product    Product
-	Conditions []Condition
-}
-
 func CalculateProductRoute(w http.ResponseWriter, r *http.Request) {
-	var reqBody CalculateProductReq
+	var reqBody *CalculateProductDTO
 
 	if err := json.NewDecoder(r.Body).Decode(&reqBody); err != nil {
 		http.Error(w, "Bad request", http.StatusBadRequest)
 		return
 	}
 
-	if err, code := CalculateProductDTO(&reqBody); err != nil {
+	if err, code := reqBody.Check(); err != nil {
 		http.Error(w, err.Error(), code)
 		return
 	}
