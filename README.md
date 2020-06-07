@@ -1,14 +1,13 @@
-Тестовое задание для епк
+EPC Demo
 
-Запуск приложения:
+Start app:
 
 >cd docker
 
 >docker-compose up
 
-Сделать POST запрос на localhost:8080/product
-
-пример тела запроса:
+make POST request to localhost:8080/product
+example request body:
 ```json
 {
     "product": {
